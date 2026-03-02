@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>منصة الطالب الذكي - عالمك التعليمي المتكامل</title>
+    <meta name="description" content="منصة تعليمية ذكية تستخدم الذكاء الاصطناعي لمساعدة الطلاب في التعلم والمذاكرة. تشمل مساعد ذكي، مخطط دراسي، مؤقت مذاكرة، وإدارة المواد الدراسية." />
+    <meta name="keywords" content="منصة تعليمية, ذكاء اصطناعي, تعلم ذكي, مساعد طلابي, مذاكرة, تعليم عربي, منصة دراسية, مخطط دراسي, مؤقت مذاكرة" />
+    <meta name="author" content="فريق منصة الطالب الذكي" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="Arabic" />
+    <link rel="canonical" href="https://smart-student-platform-21.vercel.app/" />
+    <meta name="google-site-verification" content="tVl2kxir_Lmr9bFXdqUmvRfmS1XHuHKYP8bLvqXtzU4" />
+    <meta property="og:title" content="منصة الطالب الذكي - منصة التعلم الذكية بالذكاء الاصطناعي" />
+    <meta property="og:description" content="منصة تعليمية ذكية تستخدم الذكاء الاصطناعي لمساعدة الطلاب في التعلم والمذاكرة. تشمل مساعد ذكي، مخطط دراسي، مؤقت مذاكرة، وإدارة المواد الدراسية." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://smart-student-platform-21.vercel.app/" />
+    <meta property="og:image" content="https://j.top4top.io/p_3709gq6i11.png" />
+    <meta property="og:site_name" content="منصة الطالب الذكي" />
+    <meta property="og:locale" content="ar_SA" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="منصة الطالب الذكي - منصة التعلم الذكية بالذكاء الاصطناعي" />
+    <meta name="twitter:description" content="منصة تعليمية ذكية تستخدم الذكاء الاصطناعي لمساعدة الطلاب في التعلم والمذاكرة." />
+    <meta name="twitter:image" content="https://j.top4top.io/p_3709gq6i11.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="https://j.top4top.io/p_3709gq6i11.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lamejs@1.2.1/lame.min.js"></script>
+    <script>
+      window.process = { env: { NODE_ENV: 'production' } };
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: { cairo: ['Cairo', 'sans-serif'] },
+            borderRadius: { '4xl': '2rem', '5xl': '3rem' },
+            colors: {
+              indigo: {
+                50: '#f5f7ff',
+                100: '#ebf0fe',
+                200: '#dae3fd',
+                300: '#c0ccfb',
+                400: '#9baaf7',
+                500: '#6366f1',
+                600: '#4f46e5',
+                700: '#4338ca',
+                800: '#3730a3',
+                900: '#312e81',
+                950: '#1e1b4b',
+              },
+              slate: {
+                950: '#020617',
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body { 
+        font-family: 'Cairo', sans-serif; 
+        overflow-x: hidden; 
+        margin: 0;
+        transition: background-color 0.5s ease, color 0.5s ease;
+      }
+      
+      /* تحسين شريط التمرير للوضعين */
+      .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+      .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+      .custom-scrollbar::-webkit-scrollbar-thumb { 
+        background: #6366f1; 
+        border-radius: 10px; 
+      }
+      .dark .custom-scrollbar::-webkit-scrollbar-thumb { background: #4f46e5; }
+
+      /* لون تحديد النصوص */
+      ::selection { background: #6366f1; color: white; }
+      .dark ::selection { background: #818cf8; color: white; }
+
+      @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+      .animate-in { animation: fadeIn 0.4s ease-out forwards; }
+      
+      /* منع اهتزاز العناصر أثناء التحميل */
+      .preserve-3d { transform-style: preserve-3d; }
+      .backface-hidden { backface-visibility: hidden; }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.4",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "@supabase/supabase-js": "https://esm.sh/@supabase/supabase-js@^2.96.0",
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4",
+    "lucide-react": "https://esm.sh/lucide-react@^0.574.0",
+    "vite": "https://esm.sh/vite@^7.3.1",
+    "@google/genai": "https://esm.sh/@google/genai@^1.41.0",
+    "pptxgenjs": "https://esm.sh/pptxgenjs@^4.0.1"
+  }
+}
+</script>
+</head>
+  <body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-500">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>

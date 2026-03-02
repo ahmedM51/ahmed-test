@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://smart-student-platform-21.vercel.app/sitemap.xml

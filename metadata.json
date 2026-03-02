@@ -1,0 +1,9 @@
+{
+  "name": "منصة الطالب الذكي (Smart Student Platform)",
+  "description": "منصة تعليمية متطورة مدعومة بالذكاء الاصطناعي تشمل مخططات دراسية، مساعدين ذكيين، وتتبع التقدم الدراسي.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ]
+}
