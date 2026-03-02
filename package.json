@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:full": "concurrently \"npm run dev\" \"npm run dev:server\"",
     "dev:server": "node server.js",
     "build": "tsc && vite build",
     "preview": "vite preview",
@@ -15,6 +16,7 @@
     "@google/genai": "^1.35.0",
     "@supabase/supabase-js": "^2.45.4",
     "@tailwindcss/vite": "^4.0.0",
+    "concurrently": "^9.0.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.19.2",

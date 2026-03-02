@@ -7,8 +7,23 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const app = express();
+const corsOrigins = (process.env.CORS_ORIGIN || '')
+  .split(',')
+  .map(s => s.trim())
+  .filter(Boolean);
+
+const isDev = (process.env.NODE_ENV || 'development') !== 'production';
+
 app.use(cors({
-  origin: process.env.CORS_ORIGIN || true,
+  origin: (origin, cb) => {
+    if (!origin) return cb(null, true);
+    if (isDev && /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(origin)) {
+      return cb(null, true);
+    }
+    if (corsOrigins.length === 0) return cb(null, true);
+    if (corsOrigins.includes(origin)) return cb(null, true);
+    return cb(new Error('CORS blocked'), false);
+  },
   credentials: true,
 }));
 app.use(express.json());
@@ -16,8 +31,8 @@ app.use(express.json());
 /**
  * إعداد Supabase
  */
-const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseAnonKey = process.env.SUPABASE_ANON_KEY;
+const supabaseUrl = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY;
 const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 const supabaseAdmin = (supabaseUrl && (supabaseServiceRoleKey || supabaseAnonKey))
@@ -27,8 +42,9 @@ const supabaseAdmin = (supabaseUrl && (supabaseServiceRoleKey || supabaseAnonKey
   : null;
 
 // إعداد Gemini
-const geminiApiKey = process.env.GEMINI_API_KEY || process.env.API_KEY;
+const geminiApiKey = process.env.GEMINI_API_KEY || process.env.VITE_GEMINI_API_KEY || process.env.API_KEY;
 const ai = geminiApiKey ? new GoogleGenAI({ apiKey: geminiApiKey }) : null;
+const geminiModel = process.env.GEMINI_MODEL || 'gemini-2.0-flash';
 
 app.get('/api/health', async (req, res) => {
   res.json({ ok: true });
@@ -74,7 +90,7 @@ app.post('/api/chat', async (req, res) => {
     };
 
     const response = await ai.models.generateContent({
-      model: 'gemini-3-flash-preview',
+      model: geminiModel,
       contents: prompt,
       config,
     });
@@ -97,9 +113,16 @@ app.post('/api/chat', async (req, res) => {
       links: response.candidates?.[0]?.groundingMetadata?.groundingChunks,
     });
   } catch (error) {
+    console.error('AI error:', error);
     const message = error?.message || 'AI request failed';
     return res.status(500).json({ error: message });
   }
+});
+
+app.use((err, req, res, next) => {
+  if (res.headersSent) return next(err);
+  const message = err?.message || 'Server error';
+  return res.status(500).json({ error: message });
 });
 
 const PORT = process.env.PORT || 3000;
